@@ -1,0 +1,58 @@
+{
+  "name": "themepreview",
+  "displayName": "Theme Preview",
+  "description": "This extension displays theme values for a highlighted token",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.46.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:themepreview.previewTheme"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "themepreview.previewTheme",
+        "title": "Preview Theme"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "themepreview.previewTheme",
+          "group": "YourGroup@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Theme Preview",
+      "properties": {
+        "themePreview.theme": {
+          "type": "string",
+          "default": "{}",
+          "description": "Copy the theme object from ThemeProvider.js"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "@types/vscode": "^1.46.0",
+    "eslint": "^6.8.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.1.2",
+    "typescript": "^3.8.3",
+    "vscode-test": "^1.3.0"
+  }
+}
