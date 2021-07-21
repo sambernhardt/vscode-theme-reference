@@ -14,29 +14,15 @@ const unitLookup = {
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "themepreview" is now active!');
-
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with  registerCommand
-  // The commandId parameter must match the command field in package.json
   let disposable = vscode.commands.registerCommand(
-    'themepreview.previewTheme',
+    'themereference.themeReference',
     function () {
-      const configuration = vscode.workspace.getConfiguration('themePreview');
+      const configuration = vscode.workspace.getConfiguration('themeReference');
+      const configurationThemeObject = configuration.themeObject;
+
       let theme;
-      if (configuration.theme) {
-        let themeConfigurationString = configuration.theme;
-        themeConfigurationString = themeConfigurationString.replace(
-          'colors,',
-          ''
-        );
-        themeConfigurationString = themeConfigurationString.replace(
-          'contrastingColors: mapValues(colors, findContrastingColor),',
-          ''
-        );
-        theme = eval(`(${themeConfigurationString})`);
+      if (configurationThemeObject) {
+        theme = eval(`(${configurationThemeObject})`);
       } else {
         theme = {};
         vscode.window.showInformationMessage(
@@ -46,10 +32,11 @@ function activate(context) {
 
       const tokens = Object.keys(theme);
       const expandedTheme = [];
+
       tokens.forEach((t) => {
         const unit = unitLookup[t] || '';
-        console.log(t, unit);
         const tokenList = theme[t];
+
         if (Array.isArray(tokenList)) {
           tokenList.forEach((tokenAtIndex, idx) => {
             expandedTheme.push({

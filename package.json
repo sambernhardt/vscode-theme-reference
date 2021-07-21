@@ -1,7 +1,8 @@
 {
-  "name": "themepreview",
-  "displayName": "Theme Preview",
-  "description": "This extension displays theme values for a highlighted token",
+  "name": "themereference",
+  "displayName": "Theme Reference",
+  "description": "This extension displays a JSON object in a VSCode quick pick list.",
+  "publisher": "sam-kickup",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.46.0"
@@ -10,31 +11,31 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:themepreview.previewTheme"
+    "onCommand:themereference.themeReference"
   ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "themepreview.previewTheme",
-        "title": "Preview Theme"
+        "command": "themereference.themeReference",
+        "title": "Theme Reference"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "themepreview.previewTheme",
+          "command": "themereference.themeReference",
           "group": "YourGroup@1"
         }
       ]
     },
     "configuration": {
-      "title": "Theme Preview",
+      "title": "Theme Reference",
       "properties": {
-        "themePreview.theme": {
+        "themeReference.themeObject": {
           "type": "string",
           "default": "{}",
-          "description": "Copy the theme object from ThemeProvider.js"
+          "description": "When copying the `theme` object from ThemeProvider.js, first delete the colors and contrastingColors keys since they don't have explicit values."
         }
       }
     }
