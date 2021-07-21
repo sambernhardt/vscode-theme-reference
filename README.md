@@ -1,3 +1,5 @@
+![Tutorial](./tutorial.gif?raw=true "Title")
+
 # Getting started
 
 ## Installation
